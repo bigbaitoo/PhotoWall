@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
+    <link rel="stylesheet" href="story.css">
+</head>
+<body>
+    <div class="story-container">
+        <!-- 导航按钮 -->
+        <nav class="navigation-menu">
+            <a href="index.html" class="nav-link">Photo Wall</a>
+            <a href="timeline.html" class="nav-link">Timeline</a>
+            <a href="story.html" class="nav-link active">Our Story</a>
+        </nav>
+
+        <!-- 故事内容 -->
+        <div class="story-content">
+            <div class="story-slides">
+                <!-- 故事页面将通过JavaScript动态加载 -->
+            </div>
+        </div>
+
+        <!-- 控制按钮 -->
+        <div class="controls">
+            <button class="control-btn prev-btn" disabled>
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+            <button class="control-btn next-btn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- 添加故事按钮 -->
+        <div class="add-story-btn">
+            <button class="btn-floating" data-bs-toggle="modal" data-bs-target="#addStoryModal">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- 添加故事模态框 -->
+    <div class="modal fade" id="addStoryModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">添加新的故事页面</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="storyForm">
+                        <div class="mb-3">
+                            <label class="form-label">上传照片</label>
+                            <input type="file" class="form-control" id="storyImage" accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">标题</label>
+                            <input type="text" class="form-control" id="storyTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">日期</label>
+                            <input type="date" class="form-control" id="storyDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">故事内容</label>
+                            <textarea class="form-control" id="storyText" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="saveStory">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="story.js"></script>
+</body>
+</html>

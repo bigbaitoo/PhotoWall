@@ -1,0 +1,359 @@
+/* 全局样式 */
+body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    transition: background-color 1s ease;
+}
+
+/* 导航按钮 */
+.navigation-buttons {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.btn-outline-light {
+    border-width: 2px;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+    padding: 8px 25px;
+}
+
+.btn-outline-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-light.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: transparent;
+}
+
+/* 季节切换按钮 */
+.season-buttons {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 1000;
+}
+
+.btn-season {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-season::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+
+.btn-season:hover::before {
+    transform: scale(1);
+}
+
+.btn-season.spring {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+}
+
+.btn-season.summer {
+    background: linear-gradient(45deg, #ffd1ff, #fad0c4);
+}
+
+.btn-season.autumn {
+    background: linear-gradient(45deg, #ffecd2, #fcb69f);
+}
+
+.btn-season.winter {
+    background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+}
+
+.btn-season.active {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* 季节场景 */
+.seasons-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.season {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.season.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 春天场景 */
+.spring-scene {
+    background: linear-gradient(to bottom, #ffefba, #ffffff);
+}
+
+.cherry-blossom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.cherry-blossom::before {
+    content: '🌸';
+    position: absolute;
+    animation: fall 10s linear infinite;
+    font-size: 20px;
+}
+
+/* 夏天场景 */
+.summer-scene {
+    background: linear-gradient(to bottom, #4facfe, #00f2fe);
+}
+
+.sunshine {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #fff 0%, transparent 70%);
+    animation: shine 5s infinite;
+}
+
+/* 秋天场景 */
+.autumn-scene {
+    background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+}
+
+.falling-leaves::before {
+    content: '🍁';
+    position: absolute;
+    animation: fall 15s linear infinite;
+    font-size: 24px;
+}
+
+/* 冬天场景 */
+.winter-scene {
+    background: linear-gradient(to bottom, #e3eeff, #ffffff);
+}
+
+.snowfall::before {
+    content: '❄';
+    position: absolute;
+    color: white;
+    animation: snowfall 10s linear infinite;
+    font-size: 16px;
+}
+
+/* 照片网格 */
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 100px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.photo-item {
+    position: relative;
+    padding-top: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+}
+
+.photo-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.photo-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
+
+/* 编辑按钮 */
+.edit-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-item:hover .edit-overlay {
+    opacity: 1;
+}
+
+/* 动画关键帧 */
+@keyframes fall {
+    0% {
+        transform: translate(0, -10%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(100px, 100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes shine {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translate(0, -10px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(50px, 100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 音乐播放器 */
+#music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 300px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navigation-buttons {
+        padding: 5px 10px;
+    }
+    
+    .btn-outline-light {
+        padding: 5px 15px;
+        margin: 0 5px;
+        font-size: 0.9em;
+    }
+    
+    .season-buttons {
+        left: 10px;
+    }
+    
+    .btn-season {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+    
+    .photos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+        padding: 80px 20px;
+    }
+    
+    #music-player {
+        width: 250px;
+    }
+}
+
+/* 模态框样式 */
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 15px;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 密码错误动画 */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.password-shake {
+    animation: shake 0.5s ease-in-out;
+}

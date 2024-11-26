@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四季轮转相册 - 爱的记忆</title>
+    
+    <!-- 引入依赖 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css" rel="stylesheet">
+    <link href="seasons.css" rel="stylesheet">
+    
+    <!-- 音频播放器 -->
+    <link href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="navigation-buttons">
+        <a href="index.html" class="btn btn-outline-light">照片墙</a>
+        <a href="timeline.html" class="btn btn-outline-light">时光轴</a>
+        <a href="heart.html" class="btn btn-outline-light">爱心墙</a>
+        <a href="seasons.html" class="btn btn-outline-light active">四季相册</a>
+    </div>
+
+    <!-- 四季切换按钮 -->
+    <div class="season-buttons">
+        <button class="btn btn-season spring active" data-season="spring">春</button>
+        <button class="btn btn-season summer" data-season="summer">夏</button>
+        <button class="btn btn-season autumn" data-season="autumn">秋</button>
+        <button class="btn btn-season winter" data-season="winter">冬</button>
+    </div>
+
+    <!-- 四季场景容器 -->
+    <div class="seasons-container">
+        <div class="season spring-scene active">
+            <div class="scene-effects">
+                <div class="cherry-blossom"></div>
+            </div>
+            <div class="photos-grid" id="spring-photos"></div>
+        </div>
+        
+        <div class="season summer-scene">
+            <div class="scene-effects">
+                <div class="sunshine"></div>
+            </div>
+            <div class="photos-grid" id="summer-photos"></div>
+        </div>
+        
+        <div class="season autumn-scene">
+            <div class="scene-effects">
+                <div class="falling-leaves"></div>
+            </div>
+            <div class="photos-grid" id="autumn-photos"></div>
+        </div>
+        
+        <div class="season winter-scene">
+            <div class="scene-effects">
+                <div class="snowfall"></div>
+            </div>
+            <div class="photos-grid" id="winter-photos"></div>
+        </div>
+    </div>
+
+    <!-- 音乐播放器 -->
+    <div id="music-player"></div>
+
+    <!-- 编辑模态框 -->
+    <div class="modal fade" id="passwordModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">请输入编辑密码</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="editPassword" placeholder="密码">
+                        <label for="editPassword">密码</label>
+                        <div class="invalid-feedback">密码错误，请重试</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="verifyPassword">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 照片编辑模态框 -->
+    <div class="modal fade" id="editPhotoModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">编辑照片</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPhotoForm">
+                        <input type="hidden" id="editPhotoIndex">
+                        <div class="mb-3">
+                            <label for="editPhotoTitle" class="form-label">照片描述</label>
+                            <input type="text" class="form-control" id="editPhotoTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPhotoDate" class="form-label">拍摄日期</label>
+                            <input type="date" class="form-control" id="editPhotoDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPhotoSeason" class="form-label">所属季节</label>
+                            <select class="form-control" id="editPhotoSeason">
+                                <option value="spring">春天</option>
+                                <option value="summer">夏天</option>
+                                <option value="autumn">秋天</option>
+                                <option value="winter">冬天</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPhotoFile" class="form-label">更换照片</label>
+                            <input type="file" class="form-control" id="editPhotoFile" accept="image/*">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deletePhoto">删除</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="saveEditPhoto">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除确认模态框 -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">确认删除</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    确定要删除这张照片吗？此操作不可撤销。
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <script src="seasons.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+/* 全局样式 */
+body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 20s ease infinite;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 0%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    padding: 2rem;
+    max-width: 1400px;
+}
+
+/* 导航按钮 */
+.navigation-buttons {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.btn-outline-light {
+    border-width: 2px;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+    padding: 8px 25px;
+    font-weight: 500;
+}
+
+.btn-outline-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-light.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: transparent;
+}
+
+/* 时光轴容器 */
+.timeline-container {
+    position: relative;
+    padding: 40px 0;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 时光轴中线 */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    border-radius: 2px;
+}
+
+/* 时光轴项目 */
+.timeline-item {
+    padding: 15px 40px;
+    position: relative;
+    width: 50%;
+    animation: fadeInUp 0.8s ease forwards;
+    margin-bottom: 30px;
+}
+
+/* 时间点样式 */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 4px solid #ff7eb3;
+    top: 20px;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(255,126,179,0.5);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover::after {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(255,126,179,0.8);
+}
+
+/* 左右布局 */
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+.timeline-item.left::after {
+    right: -10px;
+}
+
+.timeline-item.right::after {
+    left: -10px;
+}
+
+/* 内容卡片 */
+.timeline-content {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* 图片容器 */
+.timeline-img {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.timeline-img img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-radius: 10px;
+}
+
+.timeline-content:hover .timeline-img img {
+    transform: scale(1.05);
+}
+
+/* 文本内容 */
+.timeline-text {
+    padding: 10px 0;
+}
+
+.timeline-text h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+}
+
+.timeline-text .date {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+/* 编辑按钮 */
+.edit-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    z-index: 100;
+}
+
+.timeline-content:hover .edit-overlay {
+    display: block;
+}
+
+.edit-btn {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.edit-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.edit-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 992px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item.right {
+        left: 0;
+    }
+
+    .timeline-item.left::after,
+    .timeline-item.right::after {
+        left: 18px;
+    }
+
+    .timeline-img img {
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .timeline-item {
+        padding-left: 60px;
+        padding-right: 15px;
+    }
+
+    .timeline-text h3 {
+        font-size: 1.1rem;
+    }
+
+    .timeline-text .date {
+        font-size: 0.8rem;
+    }
+
+    .edit-overlay {
+        display: block;
+        opacity: 0.8;
+    }
+
+    .timeline-img img {
+        height: 180px;
+    }
+
+    .navigation-buttons .btn-outline-light {
+        padding: 6px 15px;
+        font-size: 0.9rem;
+    }
+}

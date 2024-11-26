@@ -1,0 +1,264 @@
+/* 全局样式 */
+body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 20s ease infinite;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 0%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 导航按钮 */
+.navigation-buttons {
+    margin: 20px 0;
+}
+
+.btn-outline-light {
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* 照片墙样式 */
+.photo-wall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.photo-item {
+    width: calc(25% - 15px);
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
+
+.photo-info {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.photo-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.photo-info p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 编辑按钮样式 */
+.edit-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    z-index: 100;
+}
+
+.photo-item:hover .edit-overlay {
+    display: block;
+}
+
+.edit-btn {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.edit-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.edit-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+/* 上传按钮 */
+.upload-section {
+    margin: 20px 0;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #23a6d5, #23d5ab);
+    border: none;
+    padding: 10px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #23a6d5, #e73c7e);
+}
+
+/* 浮动爱心 */
+#floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 24px;
+    animation: float-up 5s ease-in-out forwards;
+    opacity: 0;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* 模态框样式 */
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 15px;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 密码验证样式 */
+#editPassword.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.password-shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .photo-item {
+        width: calc(33.333% - 15px);
+    }
+}
+
+@media (max-width: 992px) {
+    .photo-item {
+        width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 576px) {
+    .photo-item {
+        width: 100%;
+    }
+
+    .edit-overlay {
+        display: block;
+        opacity: 0.8;
+    }
+
+    .photo-info h3 {
+        font-size: 1rem;
+    }
+
+    .photo-info p {
+        font-size: 0.8rem;
+    }
+}
