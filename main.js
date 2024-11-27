@@ -37,7 +37,6 @@ $(document).ready(function() {
                 <img src="${photo.url}" alt="${photo.description || ''}" onclick="showLightbox(${index})">
                 <div class="photo-info">
                     <h3>${photo.description || 'Our Photo'}</h3>
-                    <p>${new Date(photo.timestamp).toLocaleDateString()}</p>
                 </div>
             </div>
         `;
@@ -207,4 +206,47 @@ $(document).ready(function() {
 
     // 初始化加载照片
     loadSavedPhotos();
+
+    // 全屏查看照片
+    function displayPhotos() {
+        const photoWall = document.getElementById('photo-wall');
+        photoWall.innerHTML = '';
+
+        photos.forEach((photo, index) => {
+            const photoDiv = document.createElement('div');
+            photoDiv.className = 'photo-container animate__animated animate__fadeIn';
+            photoDiv.style.cursor = 'pointer';
+            
+            const img = document.createElement('img');
+            img.src = photo.url;
+            img.alt = 'Photo';
+            img.className = 'photo';
+            
+            photoDiv.appendChild(img);
+            
+            // 添加点击事件以全屏查看
+            photoDiv.addEventListener('click', () => {
+                openFullscreen(photo.url);
+            });
+            
+            photoWall.appendChild(photoDiv);
+        });
+    }
+
+    function openFullscreen(imageUrl) {
+        const overlay = document.createElement('div');
+        overlay.className = 'fullscreen-overlay';
+        
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.className = 'fullscreen-image';
+        
+        overlay.appendChild(img);
+        
+        overlay.addEventListener('click', () => {
+            document.body.removeChild(overlay);
+        });
+        
+        document.body.appendChild(overlay);
+    }
 });
